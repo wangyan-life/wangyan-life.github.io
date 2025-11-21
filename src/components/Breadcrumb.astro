@@ -2,7 +2,6 @@
 // Remove trailing slashes and normalize
 const currentUrlPath = Astro.url.pathname.replace(/\/+$/, "");
 
-import { SITE } from "@/config";
 import LOCALE from "@/i18n";
 
 // split into path segments
@@ -18,11 +17,7 @@ const buildBreadcrumbs = (segments: string[]): Array<{ text: string; href: strin
   const items: Array<{ text: string; href: string }> = [];
 
   // use breadcrumbNames from site config when available (fall back to these defaults)
-  const nameMap: Record<string, string> = LOCALE?.breadcrumbNames ?? {
-    about: "关于",
-    archives: "归档",
-    search: "搜索",
-  };
+  const nameMap: Record<string, string> = LOCALE.breadcrumbNames;
 
   if (segments.length === 0) return items; // root only: no extra crumbs
 
@@ -30,18 +25,18 @@ const buildBreadcrumbs = (segments: string[]): Array<{ text: string; href: strin
   if (segments[0] === "posts") {
     // /posts -> [ {text: '文章', href: '/posts/'} ]
     if (segments.length === 1) {
-      items.push({ text: "文章", href: "/posts/" });
+      items.push({ text: LOCALE.breadcrumbNames.posts, href: "/posts/" });
       return items;
     }
 
     // /posts/2 -> page listing
     if (isNumeric(segments[1])) {
-      items.push({ text: `文章（第 ${segments[1]} 页）`, href: `/posts/${segments[1]}/` });
+      items.push({ text: `${LOCALE.breadcrumbNames.posts}（第 ${segments[1]} 页）`, href: `/posts/${segments[1]}/` });
       return items;
     }
 
     // /posts/<slug>[/...]
-    items.push({ text: "文章", href: "/posts/" });
+    items.push({ text: LOCALE.breadcrumbNames.posts, href: "/posts/" });
     // append rest segments as hierarchical pages under /posts/
     for (let i = 1; i < segments.length; i++) {
       const seg = segments[i];
@@ -56,18 +51,18 @@ const buildBreadcrumbs = (segments: string[]): Array<{ text: string; href: strin
   if (segments[0] === "tags") {
     // /tags -> 标签
     if (segments.length === 1) {
-      items.push({ text: "标签", href: "/tags/" });
+      items.push({ text: LOCALE.breadcrumbNames.tags, href: "/tags/" });
       return items;
     }
 
     // /tags/<page> when second segment is numeric -> 标签（第 N 页）
     if (isNumeric(segments[1])) {
-      items.push({ text: `标签（第 ${segments[1]} 页）`, href: `/tags/${segments[1]}/` });
+      items.push({ text: `${LOCALE.breadcrumbNames.tags}（第 ${segments[1]} 页）`, href: `/tags/${segments[1]}/` });
       return items;
     }
 
     // /tags/<tag> or /tags/<tag>/<page>
-    items.push({ text: "标签", href: "/tags/" });
+    items.push({ text: LOCALE.breadcrumbNames.tags, href: "/tags/" });
 
     const tag = decodeURIComponent(segments[1]);
     if (segments.length === 2) {
@@ -121,16 +116,13 @@ const breadcrumbs = buildBreadcrumbs(segments);
       breadcrumbs.map((item, index) =>
         index + 1 === breadcrumbs.length ? (
           <li>
-            <span
-              class:list={["capitalize opacity-75", { lowercase: index > 0 }]}
-              aria-current="page"
-            >
+            <span class="opacity-75" aria-current="page">
               {currentTitle && currentTitle.trim() !== "" ? currentTitle : item.text}
             </span>
           </li>
         ) : (
           <li>
-            <a href={item.href} class="capitalize opacity-70">
+            <a href={item.href} class="opacity-70">
               {item.text}
             </a>
             <span aria-hidden="true">&raquo;</span>

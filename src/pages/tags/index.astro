@@ -14,9 +14,9 @@ const posts = await getCollection("blog");
 let tags = getUniqueTags(posts);
 ---
 
-<Layout title={`${LOCALE.breadcrumbNames?.tags ?? "标签"} | ${SITE.title}`}>
+<Layout title={`${LOCALE.breadcrumbNames.tags} | ${SITE.title}`}>
   <Header />
-  <Main pageTitle={LOCALE.breadcrumbNames?.tags ?? "标签"} pageDesc="所有文章中使用的标签。">
+  <Main pageTitle={LOCALE.breadcrumbNames.tags} pageDesc="所有文章中使用的标签。">
     <ul>
       {tags.map(({ tag, tagName }) => <Tag {tag} {tagName} size="lg" />)}
     </ul>

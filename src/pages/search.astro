@@ -10,9 +10,9 @@ import LOCALE from "@/i18n";
 const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
 ---
 
-<Layout title={`${LOCALE.breadcrumbNames?.search ?? "搜索"} | ${SITE.title}`}>
+<Layout title={`${LOCALE.breadcrumbNames.search} | ${SITE.title}`}>
   <Header />
-  <Main pageTitle={LOCALE.breadcrumbNames?.search ?? "搜索"} pageDesc="搜索所有文章...">
+  <Main pageTitle={LOCALE.breadcrumbNames.search} pageDesc="搜索所有文章...">
     <div id="pagefind-search" transition:persist data-backurl={backUrl}></div>
   </Main>
   <Footer />

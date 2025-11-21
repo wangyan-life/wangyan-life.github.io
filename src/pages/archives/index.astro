@@ -16,25 +16,12 @@ if (!SITE.showArchives) {
 
 const posts = await getCollection("blog", ({ data }) => !data.draft);
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+const months = LOCALE.months;
 ---
 
-<Layout title={`${LOCALE.breadcrumbNames?.archives ?? "归档"} | ${SITE.title}`}>
+<Layout title={`${LOCALE.breadcrumbNames.archives} | ${SITE.title}`}>
   <Header />
-  <Main pageTitle={LOCALE.breadcrumbNames?.archives ?? "归档"} pageDesc="我归档的所有文章。">
+  <Main pageTitle={LOCALE.breadcrumbNames.archives} pageDesc="我归档的所有文章。">
     {
       Object.entries(
         getPostsByGroupCondition(posts, post =>

@@ -10,8 +10,8 @@ export const SITE = {
 
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
-  postPerIndex: 4,
-  postPerPage: 4,
+  postPerIndex: 5,
+  postPerPage: 5,
   scheduledPostMargin: 15 * 60 * 1000, // 15 分钟
   showArchives: true,
   showBackButton: true, // 在文章详情页显示返回按钮
@@ -20,10 +20,10 @@ export const SITE = {
   editPost: {
     enabled: true,
     text: "编辑文章",
-    url: "https://github.com/satnaing/astro-paper/edit/main/",
+    url: "https://github.com/wangyan-life/wangyan-life.github.io/edit/main/",
   },
 
-  dynamicOgImage: true,
+  dynamicOgImage: true, // 是否启用动态 Open Graph 图片生成
   dir: "ltr", // "rtl" | "auto" 文本阅读和布局方向
   lang: "zh", // HTML 语言代码，若留空则默认为“en”
   timezone: "Asia/Shanghai", // 默认全局时区（IANA 格式） https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
