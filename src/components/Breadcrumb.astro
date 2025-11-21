@@ -1,0 +1,142 @@
+---
+// Remove trailing slashes and normalize
+const currentUrlPath = Astro.url.pathname.replace(/\/+$/, "");
+
+import { SITE } from "@/config";
+import LOCALE from "@/i18n";
+
+// split into path segments
+const segments = currentUrlPath.split("/").slice(1).filter(Boolean);
+
+const isNumeric = (s: string) => !isNaN(Number(s));
+
+/**
+ * Build a robust breadcrumbs array where each item is { text, href }
+ * This makes it easier to control labels and urls for special routes (posts, tags)
+ */
+const buildBreadcrumbs = (segments: string[]): Array<{ text: string; href: string }> => {
+  const items: Array<{ text: string; href: string }> = [];
+
+  // use breadcrumbNames from site config when available (fall back to these defaults)
+  const nameMap: Record<string, string> = LOCALE?.breadcrumbNames ?? {
+    about: "关于",
+    archives: "归档",
+    search: "搜索",
+  };
+
+  if (segments.length === 0) return items; // root only: no extra crumbs
+
+  // posts related routes
+  if (segments[0] === "posts") {
+    // /posts -> [ {text: '文章', href: '/posts/'} ]
+    if (segments.length === 1) {
+      items.push({ text: "文章", href: "/posts/" });
+      return items;
+    }
+
+    // /posts/2 -> page listing
+    if (isNumeric(segments[1])) {
+      items.push({ text: `文章（第 ${segments[1]} 页）`, href: `/posts/${segments[1]}/` });
+      return items;
+    }
+
+    // /posts/<slug>[/...]
+    items.push({ text: "文章", href: "/posts/" });
+    // append rest segments as hierarchical pages under /posts/
+    for (let i = 1; i < segments.length; i++) {
+      const seg = segments[i];
+      const href = `/posts/${segments.slice(1, i + 1).join("/")}/`;
+      items.push({ text: decodeURIComponent(seg), href });
+    }
+
+    return items;
+  }
+
+  // tags related routes
+  if (segments[0] === "tags") {
+    // /tags -> 标签
+    if (segments.length === 1) {
+      items.push({ text: "标签", href: "/tags/" });
+      return items;
+    }
+
+    // /tags/<page> when second segment is numeric -> 标签（第 N 页）
+    if (isNumeric(segments[1])) {
+      items.push({ text: `标签（第 ${segments[1]} 页）`, href: `/tags/${segments[1]}/` });
+      return items;
+    }
+
+    // /tags/<tag> or /tags/<tag>/<page>
+    items.push({ text: "标签", href: "/tags/" });
+
+    const tag = decodeURIComponent(segments[1]);
+    if (segments.length === 2) {
+      items.push({ text: tag, href: `/tags/${segments[1]}/` });
+      return items;
+    }
+
+    // segments.length >= 3
+    if (isNumeric(segments[2])) {
+      const page = segments[2];
+      items.push({ text: page === "1" ? `${tag}` : `${tag}（第 ${page} 页）`, href: `/tags/${segments[1]}/${page}/` });
+      return items;
+    }
+
+    // deeper nested - fall back to hierarchical under tags
+    for (let i = 1; i < segments.length; i++) {
+      const seg = segments[i];
+      const href = `/tags/${segments.slice(1, i + 1).join("/")}/`;
+      items.push({ text: decodeURIComponent(seg), href });
+    }
+
+    return items;
+  }
+
+  // default: build hierarchical breadcrumbs for any other path
+  for (let i = 0; i < segments.length; i++) {
+    const seg = segments[i];
+    const href = `/${segments.slice(0, i + 1).join("/")}/`;
+    const text = nameMap[seg] ?? decodeURIComponent(seg);
+    items.push({ text, href });
+  }
+
+  return items;
+};
+
+// accept optional page title from layout/pages
+const { currentTitle }: { currentTitle?: string } = Astro.props ?? {};
+
+const breadcrumbs = buildBreadcrumbs(segments);
+---
+
+<nav class="mx-auto mt-8 mb-1 w-full max-w-app px-4" aria-label="breadcrumb">
+  <ul
+    class="font-light [&>li]:inline [&>li:not(:last-child)>a]:hover:opacity-100"
+  >
+    <li>
+      <a href="/" class="opacity-80">主页</a>
+      <span aria-hidden="true" class="opacity-80">&raquo;</span>
+    </li>
+    {
+      breadcrumbs.map((item, index) =>
+        index + 1 === breadcrumbs.length ? (
+          <li>
+            <span
+              class:list={["capitalize opacity-75", { lowercase: index > 0 }]}
+              aria-current="page"
+            >
+              {currentTitle && currentTitle.trim() !== "" ? currentTitle : item.text}
+            </span>
+          </li>
+        ) : (
+          <li>
+            <a href={item.href} class="capitalize opacity-70">
+              {item.text}
+            </a>
+            <span aria-hidden="true">&raquo;</span>
+          </li>
+        )
+      )
+    }
+  </ul>
+</nav>

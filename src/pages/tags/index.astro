@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import Main from "@/layouts/Main.astro";
+import Layout from "@/layouts/Layout.astro";
+import Tag from "@/components/Tag.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import getUniqueTags from "@/utils/getUniqueTags";
+import { SITE } from "@/config";
+import LOCALE from "@/i18n";
+
+const posts = await getCollection("blog");
+
+let tags = getUniqueTags(posts);
+---
+
+<Layout title={`${LOCALE.breadcrumbNames?.tags ?? "标签"} | ${SITE.title}`}>
+  <Header />
+  <Main pageTitle={LOCALE.breadcrumbNames?.tags ?? "标签"} pageDesc="所有文章中使用的标签。">
+    <ul>
+      {tags.map(({ tag, tagName }) => <Tag {tag} {tagName} size="lg" />)}
+    </ul>
+  </Main>
+  <Footer />
+</Layout>
