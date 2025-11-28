@@ -67,7 +67,10 @@
     }
 
     code {
-      @apply rounded bg-muted/75 p-1 break-words text-foreground before:content-none after:content-none;
+      @apply rounded bg-muted/75 p-1 break-words text-foreground before:content-none after:content-none font-mono;
+      /* Prefer the project monospace font variable if available, otherwise fallback to system monospace */
+      font-family: var(--font-roboto-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace);
+      font-variant-ligatures: none;
     }
 
     .astro-code code {
@@ -77,6 +80,8 @@
     blockquote {
       @apply border-s-accent/80 break-words opacity-80;
     }
+
+  /* Hitokoto small sentence style moved to global scope below */
 
     details {
       @apply inline-block cursor-pointer text-foreground select-none [&_p]:hidden [&_ul]:!my-0;
@@ -93,7 +98,10 @@
 
   /* ===== Code Blocks & Syntax Highlighting ===== */
   .astro-code {
-    @apply flex border bg-(--shiki-light-bg) text-(--shiki-light) outline-border [&_span]:text-(--shiki-light);
+  @apply flex border bg-(--shiki-light-bg) text-(--shiki-light) outline-border [&_span]:text-(--shiki-light);
+  /* ensure code blocks use monospace as well */
+  font-family: var(--font-roboto-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace);
+  font-variant-ligatures: none;
   }
 
   html[data-theme="dark"] .astro-code {
@@ -116,4 +124,28 @@
       @apply rounded-sm border border-border px-0.5 py-px;
     }
   }
+}
+
+/* Global hitokoto styles & animation (outside .app-prose so it always applies) */
+.hitokoto {
+  @apply my-3 text-base text-foreground leading-relaxed;
+}
+
+.hitokoto .hitokoto-text {
+  @apply italic text-foreground font-medium;
+  opacity: 0;
+}
+
+.hitokoto .hitokoto-from {
+  @apply text-sm text-foreground/80 font-medium;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeInUp 400ms cubic-bezier(.2,.8,.2,1) forwards;
 }

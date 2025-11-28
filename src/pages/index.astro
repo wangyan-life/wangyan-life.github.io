@@ -42,23 +42,19 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         <span class="sr-only">RSS Feed</span>
       </a>
 
-      <p>
-        AstroPaper 是一个简约、响应式、可访问且对 SEO 友好的 Astro 博客主题。该主题遵循最佳实践，并开箱即用地提供可访问性支持。默认支持浅色和深色模式。此外，还可以配置额外的配色方案。
+  <p id="hitokoto" class="hitokoto w-full" role="status" aria-live="polite">
+        <span class="hitokoto-text block w-full text-base">
+          <span class="hitokoto-quote text-2xl align-top mr-2">“</span>
+          <span class="hitokoto-inner">Loading...</span>
+          <span class="hitokoto-quote text-2xl align-top ml-2">”</span>
+        </span>
+        <span class="hitokoto-from block w-full text-end mt-3"></span>
       </p>
-      <p class="mt-2">
-        阅读博客文章或查看
-        <LinkButton
-          class="underline decoration-dashed underline-offset-4 hover:text-accent"
-          href="https://github.com/satnaing/astro-paper#readme"
-        >
-          README
-        </LinkButton> 了解更多信息。
-      </p>
+
       {
         // only display if at least one social link is enabled
         SOCIALS.length > 0 && (
-          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">社交链接：</div>
+          <div class="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-end">
             <Socials />
           </div>
         )
@@ -71,7 +67,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       featuredPosts.length > 0 && (
         <>
           <section id="featured" class="pt-12 pb-6">
-            <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
+            <h2 class="text-2xl font-semibold tracking-wide">置顶文章</h2>
             <ul>
               {featuredPosts.map(data => (
                 <Card variant="h3" {...data} />
@@ -109,10 +105,63 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
-      ?.dataset?.layout;
-    if (indexLayout) {
-      sessionStorage.setItem("backUrl", "/");
+    const indexEl = document.querySelector("#main-content");
+    if (indexEl instanceof HTMLElement) {
+      const indexLayout = indexEl.dataset?.layout;
+      if (indexLayout) {
+        sessionStorage.setItem("backUrl", "/");
+      }
+    }
+  });
+</script>
+
+<script>
+  // Fetch a single sentence (一言) from hitokoto and insert into the DOM on page load
+  document.addEventListener("astro:page-load", async () => {
+    const container = document.querySelector('#hitokoto');
+    if (!container) return;
+
+  const textWrapper = container.querySelector('.hitokoto-text');
+  const innerEl = container.querySelector('.hitokoto-inner');
+  const fromEl = container.querySelector('.hitokoto-from');
+
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 5000);
+
+      const res = await fetch('https://v1.hitokoto.cn/?c=a&c=b&c=d&c=i&c=k', { signal: controller.signal });
+      clearTimeout(timeout);
+
+      if (!res.ok) throw new Error('Network response failed.');
+      const data = await res.json();
+
+      const sentence = data.hitokoto || data.sentence || '';
+      const source = data.from || data.from_who || '';
+
+      if (innerEl && innerEl instanceof HTMLElement) {
+        innerEl.textContent = sentence;
+      }
+      if (textWrapper && textWrapper instanceof HTMLElement) {
+        textWrapper.classList.remove('fade-in');
+        // trigger reflow then re-add to restart animation
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        textWrapper.offsetHeight;
+        textWrapper.classList.add('fade-in');
+      }
+      if (fromEl) {
+        // place plain source text (no leading dash); styling will right-align
+        fromEl.textContent = source ? ` —— ${source}` : '';
+        if (fromEl instanceof HTMLElement) {
+          fromEl.classList.remove('fade-in');
+          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+          fromEl.offsetHeight;
+          fromEl.classList.add('fade-in');
+        }
+      }
+    } catch {
+      if (innerEl && innerEl instanceof HTMLElement) innerEl.textContent = 'Loading failed.';
+      if (fromEl && fromEl instanceof HTMLElement) fromEl.textContent = '';
+      // intentionally silent in production
     }
   });
 </script>

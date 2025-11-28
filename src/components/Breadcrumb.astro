@@ -104,13 +104,13 @@ const { currentTitle }: { currentTitle?: string } = Astro.props ?? {};
 const breadcrumbs = buildBreadcrumbs(segments);
 ---
 
-<nav class="mx-auto mt-8 mb-1 w-full max-w-app px-4" aria-label="breadcrumb">
+<nav class="mx-auto mt-8 mb-6 w-full max-w-app px-4" aria-label="breadcrumb">
   <ul
     class="font-light [&>li]:inline [&>li:not(:last-child)>a]:hover:opacity-100"
   >
     <li>
       <a href="/" class="opacity-80">主页</a>
-      <span aria-hidden="true" class="opacity-80">&raquo;</span>
+      <span aria-hidden="true" class="opacity-80">&gt;</span>
     </li>
     {
       breadcrumbs.map((item, index) =>
@@ -122,10 +122,10 @@ const breadcrumbs = buildBreadcrumbs(segments);
           </li>
         ) : (
           <li>
-            <a href={item.href} class="opacity-70">
+            <a href={item.href} class="opacity-80">
               {item.text}
             </a>
-            <span aria-hidden="true">&raquo;</span>
+            <span aria-hidden="true" class="opacity-80">&gt;</span>
           </li>
         )
       )
