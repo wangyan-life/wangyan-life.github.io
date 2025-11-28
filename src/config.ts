@@ -8,7 +8,7 @@ export const SITE = {
   // 可配置的 Breadcrumb 路由名映射，用于控制 src\components\Breadcrumb.astro 中的静态路径显示文本
     // breadcrumbNames 已移至 src/i18n/index.ts 管理（更便于国际化）
 
-  ogImage: "astropaper-og.jpg",
+  ogImage: "socialcard.png", // 位于 public/ 下的 Open Graph 图片路径
   lightAndDarkMode: true,
   postPerIndex: 5,
   postPerPage: 5,
