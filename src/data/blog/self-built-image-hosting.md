@@ -6,9 +6,8 @@ slug: self-built-image-hosting
 featured: false
 draft: false
 tags:
-  - Notes
-  - Images
-  - Management
+  - 图片
+  - 管理
 description:
   本文介绍了本站图片的命名方案及其管理方法。
 ---

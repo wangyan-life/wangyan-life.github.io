@@ -29,9 +29,18 @@ const buildBreadcrumbs = (segments: string[]): Array<{ text: string; href: strin
       return items;
     }
 
-    // /posts/2 -> page listing
+    // /posts/page/2 -> page listing (new pagination structure)
+    if (segments[1] === "page" && segments.length >= 3 && isNumeric(segments[2])) {
+      const page = segments[2];
+      items.push({ text: LOCALE.breadcrumbNames.posts, href: "/posts/" });
+      items.push({ text: LOCALE.pageLabel(Number(page)), href: `/posts/page/${page}/` });
+      return items;
+    }
+
+    // legacy: /posts/2 -> page listing
     if (isNumeric(segments[1])) {
-      items.push({ text: `${LOCALE.breadcrumbNames.posts}（第 ${segments[1]} 页）`, href: `/posts/${segments[1]}/` });
+      items.push({ text: LOCALE.breadcrumbNames.posts, href: "/posts/" });
+      items.push({ text: LOCALE.pageLabel(Number(segments[1])), href: `/posts/${segments[1]}/` });
       return items;
     }
 
@@ -73,7 +82,7 @@ const buildBreadcrumbs = (segments: string[]): Array<{ text: string; href: strin
     // segments.length >= 3
     if (isNumeric(segments[2])) {
       const page = segments[2];
-      items.push({ text: page === "1" ? `${tag}` : `${tag}（第 ${page} 页）`, href: `/tags/${segments[1]}/${page}/` });
+      items.push({ text: page === "1" ? `${tag}` : `${tag} ${LOCALE.pageLabel(Number(page))}`, href: `/tags/${segments[1]}/${page}/` });
       return items;
     }
 

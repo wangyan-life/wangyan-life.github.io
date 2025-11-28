@@ -7,9 +7,9 @@ featured: false
 draft: false
 tags:
   - Typecho
-  - Blog
-  - Tutorial
-  - Deployment
+  - 博客
+  - 教程
+  - 部署
 description:
     本文档详细介绍了如何在服务器上安装和配置 Typecho 博客框架，适合初学者参考。
 ---
@@ -32,7 +32,7 @@ description:
 
 访问 [Typecho 官网](http://typecho.org/download) 下载最新的稳定版本。
 
-官网版本只包含默认主题，该版本包括最新版 Joe 主题：[Typecho-Joe](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Typecho/typecho%201.20%20-%20Joe%207.3.7.zip)
+官网版本只包含默认主题，该版本包括最新版 Joe 主题：[Typecho-Joe](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Data/Typecho/typecho%201.20%20-%20Joe%207.3.7.zip)
 
 > 注：本博客已全面改用 [handsome](https://www.ihewro.com/archives/489/) 主题，不再使用 Joe 主题。
 > 

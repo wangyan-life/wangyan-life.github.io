@@ -21,13 +21,20 @@ const { props } = Astro;
 // pageTitle is an array [prefix, mainTitle]. Keep the visible H1 rendering
 // unchanged (we still render the prefix + animated mainTitle). This ensures
 // breadcrumb shows just "next-js" while the page heading can show "标签: next-js".
+// For breadcrumb (last breadcrumb item) prefer the semantic title part when
+// pageTitle is an array [prefix, mainTitle]. Keep the visible H1 rendering
+// unchanged (we still render the prefix + animated mainTitle). This ensures
+// breadcrumb shows just the tag name while the page heading can show "标签: tag".
 const currentTitle =
   "titleTransition" in props ? props.pageTitle[1] : (props.pageTitle as string);
+
+// Only pass the breadcrumb override when titleTransition is present (ie. tag pages)
+const breadcrumbTitle = "titleTransition" in props ? props.pageTitle[1] : undefined;
 
 const backUrl = SITE.showBackButton ? Astro.url.pathname : "/";
 ---
 
-<Breadcrumb currentTitle={currentTitle} />
+<Breadcrumb currentTitle={breadcrumbTitle} />
 <main
   data-backUrl={backUrl}
   id="main-content"

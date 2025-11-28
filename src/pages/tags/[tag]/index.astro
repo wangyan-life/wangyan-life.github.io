@@ -12,7 +12,6 @@ import getPostsByTag from "@/utils/getPostsByTag";
 import getSortedPosts from "@/utils/getSortedPosts";
 import getUniqueTags from "@/utils/getUniqueTags";
 import { SITE } from "@/config";
-import LOCALE from "@/i18n";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");

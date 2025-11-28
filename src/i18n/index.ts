@@ -7,6 +7,7 @@ const locales: Record<
     breadcrumbNames: Record<string, string>;
     // other global translations can go here in future
     months: string[];
+    pageLabel: (n: number) => string;
   }
 > = {
   zh: {
@@ -31,6 +32,8 @@ const locales: Record<
       "十一月",
       "十二月",
     ],
+    // localized page label for pagination
+    pageLabel: (n: number) => `第 ${n} 页`,
   },
   en: {
     breadcrumbNames: {
@@ -54,6 +57,7 @@ const locales: Record<
       "November",
       "December",
     ],
+    pageLabel: (n: number) => `Page ${n}`,
   },
 };
 

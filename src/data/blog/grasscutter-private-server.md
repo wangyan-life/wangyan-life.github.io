@@ -6,47 +6,47 @@ slug: grasscutter-private-server
 featured: false
 draft: false
 tags:
-  - Genshin Impact
+  - 原神
   - Grasscutter
-  - Private Server
-  - Games
+  - 私服
+  - 游戏
 description:
   Grasscutter 是一款非官方的某动漫游戏私服服务端软件的重新实现，支持本地和云端部署。本文档包含了草剪刀的下载链接、功能介绍、快速设置指南、构建方法以及常见问题排查等内容。
 ---
 
 ## Releases
 
-#### [2.8.0 基于 1.2.2-dev-7a2ed325 的 Grasscutter （服务端+客户端）](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Grasscutter/2.8.0/2.8.0%20-%201.2.2-dev-7a2ed325.zip)
+#### [2.8.0 基于 1.2.2-dev-7a2ed325 的 Grasscutter （服务端+客户端）](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Data/Grasscutter/2.8.0/2.8.0%20-%201.2.2-dev-7a2ed325.zip)
 
-#### [2.8.0 基于 1.2.3-dev-e26cffed 的 Grasscutter （服务端+客户端）](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Grasscutter/2.8.0/2.8.0%20-%201.2.3-dev-e26cffed.zip)
+#### [2.8.0 基于 1.2.3-dev-e26cffed 的 Grasscutter （服务端+客户端）](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Data/Grasscutter/2.8.0/2.8.0%20-%201.2.3-dev-e26cffed.zip)
 
-#### [2.8.0 基于 1.2.3-dev-e26cffed 的 Grasscutter （仅客户端+食用方法）](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Grasscutter/GrasscutterClient.zip)
+#### [2.8.0 基于 1.2.3-dev-e26cffed 的 Grasscutter （仅客户端+食用方法）](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Data/Grasscutter/GrasscutterClient.zip)
 
-#### [3.0.0 基于 1.3.1-dev-08fdcf6e 的 Grasscutter （服务端加客户端，需要打补丁）](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Grasscutter/3.0.0/3.0.0%20-%201.3.1-dev-08fdcf6e.zip)
+#### [3.0.0 基于 1.3.1-dev-08fdcf6e 的 Grasscutter （服务端加客户端，需要打补丁）](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Data/Grasscutter/3.0.0/3.0.0%20-%201.3.1-dev-08fdcf6e.zip)
 
 > 注：打补丁方式为：将 `...\Grasscutter\launcher` 文件夹下的 `global-metadata.dat` 文件复制至 `...\Genshin Impact\Genshin Impact Game\YuanShen_Data\Managed\Metadata` 文件夹下，替换原文件，注意备份原文件。
 > 
 > `1.3.1-dev-08fdcf6e` 包已知 bug：仅旅行者能获得怪物掉落经验；
 
-#### [3.0.0 基于 1.3.1-dev-08f36195 的 Grasscutter （服务端加客户端，打补丁同上，解决了已知bug）](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Grasscutter/3.0.0/3.0.0%20-%201.3.1-dev-08f36195.zip)
+#### [3.0.0 基于 1.3.1-dev-08f36195 的 Grasscutter （服务端加客户端，打补丁同上，解决了已知bug）](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Data/Grasscutter/3.0.0/3.0.0%20-%201.3.1-dev-08f36195.zip)
 
-#### [3.1.0 基于 1.3.4-dev-98ac42a6 的 Grasscutter （服务端加客户端，需要打补丁）](https://cloud.wangyan.life/d/OneDrive/%E9%A1%B9%E7%9B%AE/Grasscutter/3.1.0/3.1.0%20-%201.3.4-dev-98ac42a6.zip)
+#### [3.1.0 基于 1.3.4-dev-98ac42a6 的 Grasscutter （服务端加客户端，需要打补丁）](https://cloud.wangyan.life/d/OneDrive/%E9%A1%B9%E7%9B%AE/Data/Grasscutter/3.1.0/3.1.0%20-%201.3.4-dev-98ac42a6.zip)
 
-#### [3.1.0 基于 1.4.2-dev-be8fbcbc 的 Grasscutter （服务端加客户端，需要打补丁）](https://cloud.wangyan.life/d/OneDrive/%E9%A1%B9%E7%9B%AE/Grasscutter/3.1.0/3.1.0%20-%201.4.2-dev-be8fbcbc.zip)
+#### [3.1.0 基于 1.4.2-dev-be8fbcbc 的 Grasscutter （服务端加客户端，需要打补丁）](https://cloud.wangyan.life/d/OneDrive/%E9%A1%B9%E7%9B%AE/Data/Grasscutter/3.1.0/3.1.0%20-%201.4.2-dev-be8fbcbc.zip)
 
 > 注：自 3.1.0 版本后，打补丁方式变更为：首先下载补丁文件 `UserAssembly.dll`，然后将补丁文件 `UserAssembly.dll` 复制至 `...\Genshin Impact\Genshin Impact Game\YuanShen_Data\Native` 文件夹下，替换原文件，注意备份原文件。
 
-#### [3.1.0 版本补丁文件 UserAssembly.dll](https://cloud.wangyan.life/d/OneDrive/%E9%A1%B9%E7%9B%AE/Grasscutter/3.1.0/UserAssembly.dll)
+#### [3.1.0 版本补丁文件 UserAssembly.dll](https://cloud.wangyan.life/d/OneDrive/%E9%A1%B9%E7%9B%AE/Data/Grasscutter/3.1.0/UserAssembly.dll)
 
-#### [Grasscutter Tools v1.5.5 （适用于2.8.0）](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Grasscutter/GrasscutterTools/GrasscutterTools-v1.5.5.exe)
+#### [Grasscutter Tools v1.5.5 （适用于2.8.0）](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Data/Grasscutter/GrasscutterTools/GrasscutterTools-v1.5.5.exe)
 
-#### [Grasscutter Tools v1.6.6 （适用于3.0.0）](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Grasscutter/GrasscutterTools/GrasscutterTools-v1.6.6.exe)
+#### [Grasscutter Tools v1.6.6 （适用于3.0.0）](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Data/Grasscutter/GrasscutterTools/GrasscutterTools-v1.6.6.exe)
 
-#### [Grasscutter Tools v1.6.8 （适用于3.1.0）](https://cloud.wangyan.life/d/OneDrive/%E9%A1%B9%E7%9B%AE/Grasscutter/GrasscutterTools/GrasscutterTools-v1.6.8.exe)
+#### [Grasscutter Tools v1.6.8 （适用于3.1.0）](https://cloud.wangyan.life/d/OneDrive/%E9%A1%B9%E7%9B%AE/Data/Grasscutter/GrasscutterTools/GrasscutterTools-v1.6.8.exe)
 
-#### [仅客户端食用方法](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Grasscutter/%E9%A3%9F%E7%94%A8%E6%96%B9%E6%B3%95)
+#### [仅客户端食用方法](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Data/Grasscutter/%E9%A3%9F%E7%94%A8%E6%96%B9%E6%B3%95)
 
-#### [WinRAR v6.11 x64 SC](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Grasscutter/WinRAR_v6.11_x64_SC_Repack.exe)
+#### [WinRAR v6.11 x64 SC](https://cloud.wangyan.life/OneDrive/%E9%A1%B9%E7%9B%AE/Data/Grasscutter/WinRAR_v6.11_x64_SC_Repack.exe)
 
 ---
 

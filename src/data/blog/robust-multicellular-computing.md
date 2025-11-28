@@ -6,10 +6,9 @@ slug: robust-multicellular-computing
 featured: false
 draft: false
 tags:
-  - Synthetic Biology
-  - Genetic Circuits
-  - Multicellular Computing
-  - Tamsir 2011
+  - 合成生物学
+  - 基因电路
+  - 多细胞计算
 description: 
   本文是对 Tamsir 等人在 2011 年 1 月 13 日发表在《Natural》的"Robust multicellular computing using genetically encoded NOR gates and chemical 'wires'"一文的解读和总结。
 ---
