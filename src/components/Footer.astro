@@ -2,7 +2,7 @@
 import Hr from "./Hr.astro";
 import Socials from "./Socials.astro";
 import { SITE } from "@/config";
-import SakanaWidget from '../components/SakanaWidget.astro';
+/* import SakanaWidget from '../components/SakanaWidget.astro'; */
 
 const currentYear = new Date().getFullYear();
 
@@ -13,7 +13,7 @@ export interface Props {
 const { noMarginTop = false } = Astro.props;
 ---
 
-<SakanaWidget />
+<!-- <SakanaWidget /> -->
 
 <footer class:list={["w-full", { "mt-auto": !noMarginTop }]}>
   <Hr noPadding />
@@ -22,10 +22,11 @@ const { noMarginTop = false } = Astro.props;
   >
     <Socials centered />
     <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
-      <span>Copyright &#169; {currentYear}&nbsp;</span>
+      <span>Copyright &#169; {currentYear}</span>
       <a href="/about" class="ml-1">{SITE.title}</a>
-      <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
-      <span>All rights reserved.</span>
+      <span>&nbsp;All rights reserved.</span>
+      <span class="hidden sm:inline">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      <a href="https://beian.miit.gov.cn" target="_blank">鄂ICP备2022014375号-1</a>
     </div>
   </div>
 </footer>
